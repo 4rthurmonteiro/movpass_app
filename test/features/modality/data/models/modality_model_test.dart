@@ -28,7 +28,7 @@ void main() {
           () async {
         // arrange
         final Map<String, dynamic> jsonMap =
-        json.decode(fixture('trivia.json'));
+        json.decode(fixture('modality/modality.json')) as Map<String, dynamic>;
         // act
         final result = ModalityModel.fromJson(jsonMap);
         // assert

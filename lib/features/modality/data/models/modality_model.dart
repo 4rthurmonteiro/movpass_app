@@ -13,4 +13,14 @@ class ModalityModel extends Modality {
       id: id,
       duration: duration,
   );
+
+  factory ModalityModel.fromJson(Map<String, dynamic> json) {
+    return ModalityModel(
+      id: (json['id'] as num).toInt(),
+      label: json['label'] as String,
+      description: json['description'] as String,
+      duration: (json['duration'] as num).toInt(),
+
+    );
+  }
 }
