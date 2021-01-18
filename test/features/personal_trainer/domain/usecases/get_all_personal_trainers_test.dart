@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movpass_app/core/usecases/usecase.dart';
+import 'package:movpass_app/features/modality/data/models/modality_model.dart';
 import 'package:movpass_app/features/modality/domain/entities/modality.dart';
 import 'package:movpass_app/features/personal_trainer/domain/entities/personal_trainer.dart';
 import 'package:movpass_app/features/personal_trainer/domain/repositories/personal_trainer_repository.dart';
@@ -20,8 +21,8 @@ void main() {
   });
 
   final tModalityList = [
-    Modality(id: 1, label: 'test', description: 'test', duration: 30),
-    Modality(id: 2, label: 'test', description: 'test', duration: 78)
+    ModalityModel(id: 1, label: 'test', description: 'test', duration: 30),
+    ModalityModel(id: 2, label: 'test', description: 'test', duration: 78)
   ];
 
   final tPersonalTrainers = [

@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:movpass_app/features/modality/domain/entities/modality.dart';
+import 'package:movpass_app/features/modality/data/models/modality_model.dart';
 
 class PersonalTrainer extends Equatable {
   final String cref;
   final String email;
   final int id;
-  final List<Modality> modalities;
+  final List<ModalityModel> modalities;
   final String name;
 
   PersonalTrainer({

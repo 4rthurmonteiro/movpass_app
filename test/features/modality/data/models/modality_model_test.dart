@@ -6,10 +6,6 @@ import 'package:movpass_app/features/modality/domain/entities/modality.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 
-final tModalityList = [
-  Modality(id: 1, label: 'test', description: 'test', duration: 30),
-  Modality(id: 2, label: 'test', description: 'test', duration: 78)
-];
 
 void main() {
   final tModalityModel = ModalityModel(id: 1, label: 'test', description: 'test', duration: 30);
@@ -28,7 +24,7 @@ void main() {
           () async {
         // arrange
         final Map<String, dynamic> jsonMap =
-        json.decode(fixture('modality/modality.json')) as Map<String, dynamic>;
+        json.decode(fixture('modality.json')) as Map<String, dynamic>;
         // act
         final result = ModalityModel.fromJson(jsonMap);
         // assert
