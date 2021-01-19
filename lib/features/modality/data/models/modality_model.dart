@@ -1,7 +1,8 @@
+import 'package:movpass_app/core/utils/entity.dart';
 import 'package:movpass_app/features/modality/domain/entities/modality.dart';
 import 'package:meta/meta.dart';
 
-class ModalityModel extends Modality {
+class ModalityModel extends Modality implements Entity {
   ModalityModel({
     @required int id,
     @required String label,
@@ -22,5 +23,11 @@ class ModalityModel extends Modality {
       duration: (json['duration'] as num).toInt(),
 
     );
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    // TODO: implement toMap
+    throw UnimplementedError();
   }
 }

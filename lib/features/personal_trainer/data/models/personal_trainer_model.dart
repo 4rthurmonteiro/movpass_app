@@ -1,10 +1,11 @@
 import 'package:meta/meta.dart';
+import 'package:movpass_app/core/utils/entity.dart';
 import 'package:movpass_app/features/modality/data/models/modality_model.dart';
 import 'package:movpass_app/features/modality/domain/entities/modality.dart';
 
 import '../../domain/entities/personal_trainer.dart';
 
-class PersonalTrainerModel extends PersonalTrainer {
+class PersonalTrainerModel extends PersonalTrainer implements Entity{
   PersonalTrainerModel({
     @required String cref,
     @required String email,
@@ -37,6 +38,12 @@ class PersonalTrainerModel extends PersonalTrainer {
         : list.map((data) => ModalityModel.fromJson(data as Map<String, dynamic>)).toList();
 
     return modalitiesList;
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    // TODO: implement toMap
+    throw UnimplementedError();
   }
 
 }
