@@ -28,6 +28,11 @@ class ModalityModel extends Modality implements Entity {
   @override
   Map<String, dynamic> toMap() {
     // TODO: implement toMap
-    throw UnimplementedError();
+    return {
+      'label': label,
+      'description': description,
+      'duration': duration,
+      'id': id
+    };
   }
 }

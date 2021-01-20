@@ -63,6 +63,7 @@ Future<void> init() async {
   // External
   final databaseHelper = await DatabaseHelper.getInstance().db;
 
+  sl.registerLazySingleton(() => DatabaseHelper());
   sl.registerLazySingleton(() => databaseHelper);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());

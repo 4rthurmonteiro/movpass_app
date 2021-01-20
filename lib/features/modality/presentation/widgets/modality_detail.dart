@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movpass_app/features/modality/domain/entities/modality.dart';
+import 'package:movpass_app/features/modality/presentation/bloc/bloc.dart';
 import 'package:movpass_app/features/modality/presentation/bloc/modality_bloc.dart';
-import 'package:movpass_app/features/modality/presentation/bloc/modality_event.dart';
-import 'package:movpass_app/features/modality/presentation/bloc/modality_state.dart';
-import '../widgets/widgets.dart';
 
 import '../../../../injection_container.dart';
+import 'loading_widget.dart';
+import 'message_display.dart';
+import 'modalities_display.dart';
+import 'modality_display.dart';
 
-class ModalityPage extends StatefulWidget {
+class ModalityDetail extends StatefulWidget {
+  final String idString;
+
+  const ModalityDetail({Key key, @required this.idString}) : super(key: key);
   @override
-  _ModalityPageState createState() => _ModalityPageState();
+  _ModalityDetailState createState() => _ModalityDetailState();
 }
 
-class _ModalityPageState extends State<ModalityPage> {
+class _ModalityDetailState extends State<ModalityDetail> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Modalidades'),
+        title: Text('Modalidade'),
       ),
       body: buildBody(context),
     );
@@ -29,7 +33,7 @@ class _ModalityPageState extends State<ModalityPage> {
   BlocProvider<ModalityBloc> buildBody(BuildContext context) {
     return BlocProvider(
 
-      builder: (_) => sl<ModalityBloc>()..dispatch(GetForAllModalities()),
+      builder: (_) => sl<ModalityBloc>()..dispatch(GetModalityForId(widget.idString)),
       child: BlocBuilder<ModalityBloc, ModalityState>(
           builder: (context, state) {
             if (state is Empty) {
@@ -38,8 +42,8 @@ class _ModalityPageState extends State<ModalityPage> {
               return LoadingWidget();
             } else if (state is Error) {
               return MessageDisplay(message: state.message);
-            } else if (state is LoadedAll) {
-              return ModalitiesDisplay(modalities: state.modalities);
+            } else if (state is Loaded) {
+              return ModalityDisplay(modality: state.modality);
             }
 
             return Container(
@@ -51,5 +55,3 @@ class _ModalityPageState extends State<ModalityPage> {
 
 
 }
-
-
