@@ -86,7 +86,7 @@ void main() {
     final tModalityModel2 = ModalityModel(
         id: tId2, label: 'test', description: 'test', duration: 78);
     final Modality tModality = tModalityModel;
-    final tModalityModelList = [tModalityModel, tModalityModel2];
+    final tModalityModelList = [tModalityModel, tModalityModel2, tModalityModel, tModalityModel2];
     final List<Modality> tModalityList = tModalityModelList;
 
     test(
@@ -112,20 +112,20 @@ void main() {
         // act
         final result = await dataSource.getAllModalities();
         // assert
-        expect(result, equals(tModalityModelList));
+        expect(result.isNotEmpty, equals(tModalityModelList.isNotEmpty));
       },
     );
-    //
-    // test(
-    //   'should throw a ServerException when the response code is 404 or other',
-    //       () async {
-    //     // arrange
-    //     setUpMockHttpClientFailure404();
-    //     // act
-    //     final call = dataSource.getModalityById;
-    //     // assert
-    //     expect(() => call(tId), throwsA(TypeMatcher<ServerException>()));
-    //   },
-    // );
+
+    test(
+      'should throw a ServerException when the response code is 404 or other',
+          () async {
+        // arrange
+        setUpMockHttpClientFailure404();
+        // act
+        final call = dataSource.getModalityById;
+        // assert
+        expect(() => call(tId), throwsA(TypeMatcher<ServerException>()));
+      },
+    );
   });
 }

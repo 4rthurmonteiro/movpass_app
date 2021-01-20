@@ -24,8 +24,17 @@ class ModalityRemoteDataSourceImpl implements ModalityRemoteDataSource {
       headers: {'Content-Type': 'application/json'},
     );
 
+    if (response.statusCode == 200) {
+      final List list = json.decode(response.body) as List<dynamic>;
 
+      return list
+          .map<ModalityModel>(
+              (map) => ModalityModel.fromJson(map as Map<String, dynamic>))
+          .toList();
+    }else{
+      throw ServerException();
 
+    }
   }
 
   @override
