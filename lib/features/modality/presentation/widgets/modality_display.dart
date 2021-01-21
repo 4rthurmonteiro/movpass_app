@@ -6,7 +6,7 @@ class ModalityDisplay extends StatelessWidget {
 
   const ModalityDisplay({
     Key key,
-    this.modality,
+    @required this.modality,
   })  : assert(modality != null),
         super(key: key);
 
@@ -19,15 +19,18 @@ class ModalityDisplay extends StatelessWidget {
           children: [
             ListTile(
               title: Text('Tipo de treino'),
-              subtitle: Text(modality.label ?? ""),
+              subtitle: Text(modality.label ?? "Não informada"),
+              leading: Icon(Icons.accessibility),
             ),
             ListTile(
               title: Text('Descrição'),
-              subtitle: Text(modality.description ?? ""),
+              subtitle: Text(modality.description ?? "Não informada"),
+              leading: Icon(Icons.description),
             ),
             ListTile(
-              title: Text('Duração'),
-              subtitle: Text(modality.duration.toString() ?? ""),
+              title: const Text('Duração'),
+              subtitle: Text("${modality.duration} minuto(s)" ?? "Não informada"),
+              leading: const Icon(Icons.access_time),
             )
           ],
         ),

@@ -20,7 +20,7 @@ class _ModalityPageState extends State<ModalityPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Modalidades'),
+        title: const Text('Modalidades'),
       ),
       body: buildBody(context),
     );
@@ -33,9 +33,9 @@ class _ModalityPageState extends State<ModalityPage> {
       child: BlocBuilder<ModalityBloc, ModalityState>(
           builder: (context, state) {
             if (state is Empty) {
-              return MessageDisplay(message: 'Empty');
+              return const MessageDisplay(message: 'Empty');
             } else if (state is Loading) {
-              return LoadingWidget();
+              return const LoadingWidget();
             } else if (state is Error) {
               return MessageDisplay(message: state.message);
             } else if (state is LoadedAll) {

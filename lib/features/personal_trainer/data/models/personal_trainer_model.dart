@@ -43,7 +43,12 @@ class PersonalTrainerModel extends PersonalTrainer implements Entity{
   @override
   Map<String, dynamic> toMap() {
     // TODO: implement toMap
-    throw UnimplementedError();
+    return {
+      'id' : id,
+      'cref' : cref,
+      'email' : email,
+      'name' : name,
+    };
   }
 
 }

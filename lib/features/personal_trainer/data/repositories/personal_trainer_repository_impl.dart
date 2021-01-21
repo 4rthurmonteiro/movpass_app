@@ -20,21 +20,45 @@ class PersonalTrainerRepositoryImpl implements PersonalTrainerRepository {
   });
 
   @override
-  Future<Either<Failure, List<PersonalTrainer>>> getAllPersonalTrainers() {
-    // TODO: implement getAllPersonalTrainers
-    throw UnimplementedError();
+  Future<Either<Failure, List<PersonalTrainer>>> getAllPersonalTrainers() async {
+    if(await networkInfo.isConnected){
+     try {
+       final remotePersonalTrainers = await remoteDataSource.getAllPersonalTrainers();
+       localDataSource.cachePersonalTrainers(remotePersonalTrainers);
+       return Right(remotePersonalTrainers);
+     } on ServerException {
+       return Left(ServerFailure());
+     }
+    }else {
+      try {
+        final localPersonalTrainers = await localDataSource.getAllPersonalTrainers();
+        return Right(localPersonalTrainers);
+      } on CacheException {
+        return Left(CacheFailure());
+    }
+
+    }
   }
 
   @override
   Future<Either<Failure, PersonalTrainer>> getPersonalTrainerById(int id) async {
-    networkInfo.isConnected;
-    try {
-      final remotePersonalTrainer = await remoteDataSource.getPersonalTrainerById(id);
-      localDataSource.cachePersonalTrainer(remotePersonalTrainer);
-      return Right(remotePersonalTrainer);
-    } on ServerException{
-      return Left(ServerFailure());
+    if(await networkInfo.isConnected) {
+      try {
+        final remotePersonalTrainer = await remoteDataSource.getPersonalTrainerById(id);
+        localDataSource.cachePersonalTrainer(remotePersonalTrainer);
+        return Right(remotePersonalTrainer);
+      } on ServerException{
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final localPersonalTrainer = await localDataSource.getPersonalTrainerById(id);
+        return Right(localPersonalTrainer);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
     }
+
   }
 
 }

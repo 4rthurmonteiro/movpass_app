@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movpass_app/features/modality/presentation/bloc/bloc.dart';
-
 import 'core/utils/nav.dart';
-import 'features/modality/domain/entities/modality.dart';
-import 'features/modality/presentation/bloc/modality_bloc.dart';
 import 'features/modality/presentation/pages/modality_page.dart';
-import 'injection_container.dart';
+import 'features/personal_trainer/presentation/pages/personal_trainer_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Movpass'),
       ),
       body: Center(
@@ -34,11 +29,11 @@ class HomePage extends StatelessWidget {
                 children: [
                   Expanded(
                       child: RaisedButton(
-                    child: Text('Personal Trainer'),
+                    child: Text('Treinadores'),
                     color: Theme.of(context).accentColor,
                     textTheme: ButtonTextTheme.primary,
                     onPressed: () {
-
+                      push(context, PersonalTrainerPage());
                     },
                   )),
                   SizedBox(
@@ -46,7 +41,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: RaisedButton(
-                      child: Text('Modalidade'),
+                      child: Text('Modalidades'),
                       color: Theme.of(context).accentColor,
                       textTheme: ButtonTextTheme.primary,
                       onPressed: () {

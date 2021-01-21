@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:movpass_app/core/utils/nav.dart';
-import 'package:movpass_app/features/modality/domain/entities/modality.dart';
-import 'package:movpass_app/features/modality/presentation/widgets/modality_detail.dart';
+import 'package:movpass_app/features/personal_trainer/domain/entities/personal_trainer.dart';
+import 'package:movpass_app/features/personal_trainer/presentation/widgets/personal_trainer_detail.dart';
 
-class ModalitiesDisplay extends StatelessWidget {
-  final List<Modality> modalities;
+class PersonalTrainersDisplay extends StatelessWidget {
+  final List<PersonalTrainer> personalTrainers;
 
-  const ModalitiesDisplay({
+  const PersonalTrainersDisplay({
     Key key,
-    @required this.modalities,
-  })  : assert(modalities != null),
+    @required this.personalTrainers,
+  })  : assert(personalTrainers != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: modalities.length,
+      itemCount: personalTrainers.length,
       itemBuilder: (context, index) {
-        final Modality item = modalities[index];
-        return modalityCard(context, item);
+        final PersonalTrainer item = personalTrainers[index];
+        return personalTrainerCard(context, item);
       },
     );
   }
 }
 
-Widget modalityCard(BuildContext context, Modality item) {
+Widget personalTrainerCard(BuildContext context, PersonalTrainer item) {
   return GestureDetector(
     child: Container(
       decoration: BoxDecoration(
@@ -47,15 +47,11 @@ Widget modalityCard(BuildContext context, Modality item) {
                       crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        Text(item.label, style: TextStyle(fontSize: 20, color: Colors.black)),
+                        Text(item.name ?? "Não informado.", style: TextStyle(fontSize: 20, color: Colors.black)),
                         SizedBox(height: 10,),
-                        Row(
-                          children: [
-                            Text('Duração: '),
-                            Icon(Icons.access_time),
-                            Text(item.duration.toString() + ' minutos'),
-                          ],
-                        )
+
+                        Text("CREF: " + item.cref ?? "Não informado.", style: TextStyle(fontSize: 20, color: Colors.black)),
+
                       ],
                     ),
                   ),
@@ -76,7 +72,7 @@ Widget modalityCard(BuildContext context, Modality item) {
       ),
     ),
     onTap: (){
-      push(context, ModalityDetail(idString: item.id.toString()));
+      push(context, PersonalTrainerDetail(idString: item.id.toString()));
     },
   );
 }

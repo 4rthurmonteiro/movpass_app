@@ -31,9 +31,8 @@ class ModalityRemoteDataSourceImpl implements ModalityRemoteDataSource {
           .map<ModalityModel>(
               (map) => ModalityModel.fromJson(map as Map<String, dynamic>))
           .toList();
-    }else{
+    } else {
       throw ServerException();
-
     }
   }
 

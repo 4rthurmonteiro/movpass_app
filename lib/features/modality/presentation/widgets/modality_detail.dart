@@ -4,8 +4,8 @@ import 'package:movpass_app/features/modality/presentation/bloc/bloc.dart';
 import 'package:movpass_app/features/modality/presentation/bloc/modality_bloc.dart';
 
 import '../../../../injection_container.dart';
-import 'loading_widget.dart';
-import 'message_display.dart';
+import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/widgets/message_display.dart';
 import 'modalities_display.dart';
 import 'modality_display.dart';
 
@@ -24,7 +24,7 @@ class _ModalityDetailState extends State<ModalityDetail> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Modalidade'),
+        title: const Text('Modalidade'),
       ),
       body: buildBody(context),
     );
@@ -37,14 +37,15 @@ class _ModalityDetailState extends State<ModalityDetail> {
       child: BlocBuilder<ModalityBloc, ModalityState>(
           builder: (context, state) {
             if (state is Empty) {
-              return MessageDisplay(message: 'Empty');
+              return const MessageDisplay(message:'Empty');
             } else if (state is Loading) {
-              return LoadingWidget();
+              return const LoadingWidget();
             } else if (state is Error) {
               return MessageDisplay(message: state.message);
             } else if (state is Loaded) {
               return ModalityDisplay(modality: state.modality);
             }
+
 
             return Container(
               color: Colors.blue,
